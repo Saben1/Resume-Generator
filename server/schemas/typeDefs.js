@@ -1,49 +1,52 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require('apollo-server');
 
 const typeDefs = gql`
   type User {
     _id: ID
     username: String
     email: String
-    password: String
-    thoughts: [Thought]!
+    educations: [Education]
+    experiences: [Experience]
   }
 
-  type Thought {
+  type Education {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
+    school: String
+    degree: String
+    fieldOfStudy: String
+    startDate: String
+    endDate: String
   }
 
-  type Comment {
+  type Experience {
     _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String
-  }
-
-  type Auth {
-    token: ID!
-    user: User
+    company: String
+    position: String
+    startDate: String
+    endDate: String
   }
 
   type Query {
-    users: [User]
-    user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
-    me: User
+    getUser(username: String!): User
+    getEducation(_id: ID!): Education
+    getExperience(_id: ID!): Experience
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    createUser(username: String!, email: String!): User
+    createEducation(
+      school: String!
+      degree: String!
+      fieldOfStudy: String!
+      startDate: String!
+      endDate: String!
+    ): Education
+    createExperience(
+      company: String!
+      position: String!
+      startDate: String!
+      endDate: String!
+    ): Experience
   }
 `;
 
