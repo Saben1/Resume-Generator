@@ -1,52 +1,75 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
     _id: ID
-    username: String
-    email: String
+    username: String!
+    email: String!
+    information: Information
     educations: [Education]
     experiences: [Experience]
   }
 
+  type Information {
+    _id: ID
+    fullName: String!
+    email: String!
+    dateOfBirth: String!
+    aboutMe: String
+    contactNumber: String
+  }
+
   type Education {
     _id: ID
-    school: String
-    degree: String
-    fieldOfStudy: String
-    startDate: String
-    endDate: String
+    school: String!
+    degree: String!
+    year: Int!
   }
 
   type Experience {
     _id: ID
-    company: String
-    position: String
-    startDate: String
-    endDate: String
+    company: String!
+    position: String!
+    year: Int!
+  }
+
+  type Auth {
+    token: String!
+    user: User
   }
 
   type Query {
-    getUser(username: String!): User
-    getEducation(_id: ID!): Education
-    getExperience(_id: ID!): Experience
+    users: [User]
+    user(username: String!): User
   }
 
   type Mutation {
-    createUser(username: String!, email: String!): User
-    createEducation(
-      school: String!
-      degree: String!
-      fieldOfStudy: String!
-      startDate: String!
-      endDate: String!
-    ): Education
-    createExperience(
-      company: String!
-      position: String!
-      startDate: String!
-      endDate: String!
-    ): Experience
+    addUser(username: String!, email: String!, password: String!): Auth
+    createResume(
+      informationData: InformationInput!
+      educationData: [EducationInput!]!
+      experienceData: [ExperienceInput!]!
+    ): User
+  }
+
+  input InformationInput {
+    fullName: String!
+    email: String!
+    dateOfBirth: String!
+    aboutMe: String
+    contactNumber: String
+  }
+
+  input EducationInput {
+    school: String!
+    degree: String!
+    year: Int!
+  }
+
+  input ExperienceInput {
+    company: String!
+    position: String!
+    year: Int!
   }
 `;
 

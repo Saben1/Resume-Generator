@@ -1,14 +1,14 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Education, Experience } = require('../models');
+const { User, Information, Education, Experience } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('educations experiences');
+      return User.find().populate('information educations experiences');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('educations experiences');
+      return User.findOne({ username }).populate('information educations experiences');
     },
   },
 
@@ -18,9 +18,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    createResume: async (parent, { educationData, experienceData }, context) => {
+    createResume: async (parent, { informationData, educationData, experienceData }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id);
+
+        const information = await Information.create(informationData);
+        user.information = information._id;
 
         const educations = await Education.create(educationData);
         user.educations.push(...educations);
@@ -32,6 +35,7 @@ const resolvers = {
 
         return {
           user,
+          information,
           educations,
           experiences,
         };
