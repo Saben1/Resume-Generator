@@ -15,7 +15,7 @@ const Header = () => {
           <Link className="text-light" to="/">
             <h1 className="m-0">Resume Generator</h1>
           </Link>
-          <p className="m-0">Get your resume done .</p>
+          <p className="m-0">Elevate Your Professional Profile with Expertly Crafted Resumes – Your Perfect Resume Awaits!</p>
         </div>
         <div>
           {Auth.loggedIn() ? (
