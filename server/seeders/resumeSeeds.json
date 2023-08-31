@@ -1,0 +1,14 @@
+[
+  {
+    "contact_information": "Contact info for user 1",
+    "education": "Education details for user 1",
+    "work_experience": "Work experience for user 1",
+    "skills": "Skills of user 1"
+  },
+  {
+    "contact_information": "Contact info for user 2",
+    "education": "Education details for user 2",
+    "work_experience": "Work experience for user 2",
+    "skills": "Skills of user 2"
+  }
+]

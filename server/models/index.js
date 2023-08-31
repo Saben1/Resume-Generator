@@ -1,6 +1,7 @@
 const User = require('./User');
-const Education = require('./Education');
-const Experience = require('./Experience');
-const Information = require('./Information');
+const Resume = require('./Resume');
 
-module.exports = { User, Education, Experience, Information };
+module.exports = {
+    User,
+    Resume,
+};

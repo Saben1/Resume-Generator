@@ -8,26 +8,33 @@ import Auth from '../utils/auth';
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  console.log(login);
+  console.log("login");
 
   // update state based on form input changes
   const handleChange = (event) => {
+    console.log("data 2");
     const { name, value } = event.target;
-
+    
     setFormState({
       ...formState,
       [name]: value,
     });
+    console.log("data 3");
   };
 
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
+    console.log("formState");
     try {
+      
       const { data } = await login({
         variables: { ...formState },
       });
-
+      // console.log(data);
+      console.log("Logging the user");
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);

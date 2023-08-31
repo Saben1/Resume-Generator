@@ -24,32 +24,26 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
+export const CREATE_RESUME = gql`
+  mutation createResume($educationData: [EducationInput!]!, $experienceData: [ExperienceInput!]!, $informationData: InformationInput!) {
+    createResume(educationData: $educationData, experienceData: $experienceData, informationData: $informationData) {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
+      username
+      information {
+        fullName
+        dateOfBirth
+        aboutMe
+        contactNumber
       }
-    }
-  }
-`;
-
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
+      educations {
+        school
+        degree
+        year
+      }
+      experiences {
+        company
+        position
+        year
       }
     }
   }

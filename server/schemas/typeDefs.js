@@ -2,74 +2,48 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    _id: ID
+    user_id: ID!
     username: String!
     email: String!
-    information: Information
-    educations: [Education]
-    experiences: [Experience]
+    created_at: String!
   }
 
-  type Information {
-    _id: ID
-    fullName: String!
-    email: String!
-    dateOfBirth: String!
-    aboutMe: String
-    contactNumber: String
+  type Resume {
+    resume_id: ID!
+    user_id: ID!
+    title: String!
+    content: String
+    created_at: String!
+    updated_at: String
   }
 
-  type Education {
-    _id: ID
-    school: String!
-    degree: String!
-    year: Int!
-  }
-
-  type Experience {
-    _id: ID
-    company: String!
-    position: String!
-    year: Int!
-  }
-
-  type Auth {
-    token: String!
-    user: User
+  type SavedResume {
+    saved_id: ID!
+    user_id: ID!
+    resume_id: ID!
+    saved_at: String!
   }
 
   type Query {
-    users: [User]
-    user(username: String!): User
+    getUser(userId: ID!): User
+    getResume(resumeId: ID!): Resume
+    getAllResumes: [Resume]
+    getSavedResumes(userId: ID!): [SavedResume]
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    createResume(
-      informationData: InformationInput!
-      educationData: [EducationInput!]!
-      experienceData: [ExperienceInput!]!
-    ): User
+    createUser(username: String!, email: String!, password: String!): User
+    createResume(userId: ID!, title: String!, content: String): Resume
+    updateResume(resumeId: ID!, title: String, content: String): Resume
+    deleteResume(resumeId: ID!): Boolean
+    saveResume(userId: ID!, resumeId: ID!): SavedResume
+    unsaveResume(savedId: ID!): Boolean
+    loginUser(email: String!, password: String!): AuthData
   }
 
-  input InformationInput {
-    fullName: String!
-    email: String!
-    dateOfBirth: String!
-    aboutMe: String
-    contactNumber: String
-  }
-
-  input EducationInput {
-    school: String!
-    degree: String!
-    year: Int!
-  }
-
-  input ExperienceInput {
-    company: String!
-    position: String!
-    year: Int!
+  type AuthData {
+    user: User!
+    token: String!
   }
 `;
 

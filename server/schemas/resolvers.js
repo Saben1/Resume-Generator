@@ -1,46 +1,52 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Information, Education, Experience } = require('../models');
 const { signToken } = require('../utils/auth');
+const User = require('../models/user'); // Adjust the path based on your project structure
+const Resume = require('../models/resume'); // Adjust the path based on your project structure
 
 const resolvers = {
   Query: {
-    users: async () => {
-      return User.find().populate('information educations experiences');
+    getUser: async (parent, { userId }) => {
+      return await User.findById(userId);
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('information educations experiences');
+    getAllResumes: async () => {
+      return await Resume.find();
     },
   },
-
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
+    createUser: async (parent, { username, email, password }) => {
+      const newUser = new User({
+        username,
+        email,
+        password,
+        // Other user properties...
+      });
+      return await newUser.save();
     },
-    createResume: async (parent, { informationData, educationData, experienceData }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
+    createResume: async (parent, { userId, contact_information, education, work_experience, skills }) => {
+      const newResume = new Resume({
+        user: userId,
+        contact_information,
+        education,
+        work_experience,
+        skills,
+      });
+      return await newResume.save();
+    },
+    loginUser: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
-        const information = await Information.create(informationData);
-        user.information = information._id;
-
-        const educations = await Education.create(educationData);
-        user.educations.push(...educations);
-
-        const experiences = await Experience.create(experienceData);
-        user.experiences.push(...experiences);
-
-        await user.save();
-
-        return {
-          user,
-          information,
-          educations,
-          experiences,
-        };
+      if (!user) {
+        throw new AuthenticationError('No user with this email found');
       }
-      throw new AuthenticationError('You need to be logged in to save a resume.');
+
+      const correctPassword = await user.isCorrectPassword(password);
+
+      if (!correctPassword) {
+        throw new AuthenticationError('Incorrect password');
+      }
+
+      const token = signToken(user); // Generate token
+      return { user, token };
     },
   },
 };
