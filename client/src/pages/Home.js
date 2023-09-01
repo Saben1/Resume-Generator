@@ -1,28 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { useQuery } from '@apollo/client';
+import ResumeGenerator from '../components/ResumeGenerator';
+import { GET_MY_RESUME } from '../utils/queries'; // Import the query you want to use
 
 const Home = () => {
+  // Use the useQuery hook to fetch data
+  const { loading, error, data } = useQuery(GET_MY_RESUME);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  const resumeData = data?.myResume || null; // Replace myResume with the actual field name in your query
+
   return (
-    <main>
-      <Header />
-      <div className="flex-row justify-center">
-        <div
-          className="col-12 col-md-10 mb-3 p-3"
-          style={{ border: '1px dotted #1a1a1a' }}
-        >
-          <h2>Welcome to the Resume Generator</h2>
-          <p>
-            Click the start button below to begin creating your personalized resume.
-          </p>
-          <Link to="/resume-creation" className="btn btn-lg btn-info m-2">
-            Start
-          </Link>
-        </div>
-      </div>
-      <Footer />
-    </main>
+    <div>
+      {/* Pass the resume data to the ResumeGenerator component */}
+      <ResumeGenerator resumeData={resumeData} />
+    </div>
   );
 };
 

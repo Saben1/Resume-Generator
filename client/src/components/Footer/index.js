@@ -16,7 +16,7 @@ const Footer = () => {
           </button>
         )}
         <h4>
-        Empowering job seekers worldwide with polished resumes, courtesy of the Resume Generator App  {' '}
+          Made with{' '}
           <span
             className="emoji"
             role="img"
@@ -25,6 +25,7 @@ const Footer = () => {
           >
             ❤️
           </span>{' '}
+          by the Tech Thoughts team.
         </h4>
       </div>
     </footer>

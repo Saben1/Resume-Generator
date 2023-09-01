@@ -1,58 +1,88 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_USER = gql`
-  query user($username: String!) {
+// Query to get user by username, including resume data
+export const GET_USER_BY_USERNAME = gql`
+  query GetUserByUsername($username: String!) {
     user(username: $username) {
       _id
       username
-      resumes {
+      email
+      resume {
         _id
-        information {
-          fullName
+        title
+        objective
+        education {
+          _id
+          institution
+          degree
+          startDate
+          endDate
         }
+        experience {
+          _id
+          company
+          position
+          startDate
+          endDate
+        }
+        skills
       }
     }
   }
 `;
 
-export const QUERY_ME = gql`
-  query me {
+// Query to get a specific resume by its ID
+export const GET_RESUME_BY_ID = gql`
+  query GetResumeById($resumeId: ID!) {
+    resume(resumeId: $resumeId) {
+      _id
+      title
+      objective
+      education {
+        _id
+        institution
+        degree
+        startDate
+        endDate
+      }
+      experience {
+        _id
+        company
+        position
+        startDate
+        endDate
+      }
+      skills
+    }
+  }
+`;
+
+// Query to get the currently authenticated user's resume
+export const GET_MY_RESUME = gql`
+  query GetMyResume {
     me {
       _id
       username
-      resumes {
+      resume {
         _id
-        information {
-          fullName
+        title
+        objective
+        education {
+          _id
+          institution
+          degree
+          startDate
+          endDate
         }
+        experience {
+          _id
+          company
+          position
+          startDate
+          endDate
+        }
+        skills
       }
     }
   }
 `;
-
-export const QUERY_SINGLE_RESUME = gql`
-  query resume($resumeId: ID!) {
-    resume(resumeId: $resumeId) {
-      _id
-      username
-      information {
-        fullName
-        dateOfBirth
-        aboutMe
-        contactNumber
-      }
-      educations {
-        school
-        degree
-        year
-      }
-      experiences {
-        company
-        position
-        year
-      }
-    }
-  }
-`;
-
-// Define more queries as needed
