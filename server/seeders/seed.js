@@ -1,26 +1,31 @@
-const mongoose = require('mongoose');
-const Resume = require('../models/resume'); // Adjust the path based on your project structure
-const resumeSeeds = require('./resumeSeeds.json'); // Adjust the path based on your project structure
+const db = require('../config/connection');
+const { User, Thought } = require('../models');
+const userSeeds = require('./userSeeds.json');
+const thoughtSeeds = require('./thoughtSeeds.json');
 
-mongoose.connect('mongodb://localhost/resume_generator_db', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+db.once('open', async () => {
+  try {
+    await Thought.deleteMany({});
+    await User.deleteMany({});
 
-async function seedResumes() {
-    try {
-        await Resume.deleteMany(); // Clear existing resume data
+    await User.create(userSeeds);
 
-        for (const resumeData of resumeSeeds) {
-            await Resume.create(resumeData);
+    for (let i = 0; i < thoughtSeeds.length; i++) {
+      const { _id, thoughtAuthor } = await Thought.create(thoughtSeeds[i]);
+      const user = await User.findOneAndUpdate(
+        { username: thoughtAuthor },
+        {
+          $addToSet: {
+            thoughts: _id,
+          },
         }
-
-        console.log('Resumes seeded successfully');
-    } catch (error) {
-        console.error('Error seeding resumes:', error);
-    } finally {
-        mongoose.connection.close();
+      );
     }
-}
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 
-seedResumes();
+  console.log('all done!');
+  process.exit(0);
+});

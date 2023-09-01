@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Login from './Login'; // Update the path accordingly
-import Signup from './Signup'; // Update the path accordingly
+import Login from '../pages/Login'; // Update the path accordingly
+import Signup from '../pages/Signup'; // Update the path accordingly
 
 const AuthPage = () => {
   return (

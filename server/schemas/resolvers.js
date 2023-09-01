@@ -1,52 +1,65 @@
 const { AuthenticationError } = require('apollo-server-express');
+const { User, Resume } = require('../models');
 const { signToken } = require('../utils/auth');
-const User = require('../models/user'); // Adjust the path based on your project structure
-const Resume = require('../models/resume'); // Adjust the path based on your project structure
 
 const resolvers = {
   Query: {
-    getUser: async (parent, { userId }) => {
-      return await User.findById(userId);
+    users: async () => {
+      return User.find().populate('resume'); // Assuming User has a reference to Resume
     },
-    getAllResumes: async () => {
-      return await Resume.find();
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).populate('resume'); // Assuming User has a reference to Resume
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('resume'); // Assuming User has a reference to Resume
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    // Add a query to fetch a single resume by ID
+    resume: async (parent, { resumeId }) => {
+      return Resume.findOne({ _id: resumeId });
+    },
+    // Add a query to fetch all resumes
+    resumes: async () => {
+      return Resume.find();
     },
   },
+
   Mutation: {
-    createUser: async (parent, { username, email, password }) => {
-      const newUser = new User({
-        username,
-        email,
-        password,
-        // Other user properties...
-      });
-      return await newUser.save();
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
     },
-    createResume: async (parent, { userId, contact_information, education, work_experience, skills }) => {
-      const newResume = new Resume({
-        user: userId,
-        contact_information,
-        education,
-        work_experience,
-        skills,
-      });
-      return await newResume.save();
-    },
-    loginUser: async (parent, { email, password }) => {
+    login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user with this email found');
+        throw new AuthenticationError('No user found with this email address');
       }
 
-      const correctPassword = await user.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password);
 
-      if (!correctPassword) {
-        throw new AuthenticationError('Incorrect password');
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
       }
 
-      const token = signToken(user); // Generate token
-      return { user, token };
+      const token = signToken(user);
+
+      return { token, user };
+    },
+    // Add a mutation to create a resume
+    createResume: async (parent, { resumeInput }, context) => {
+      if (context.user) {
+        const resume = await Resume.create({
+          ...resumeInput,
+          user: context.user._id,
+        });
+
+        return resume;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 };

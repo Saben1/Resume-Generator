@@ -2,48 +2,80 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    user_id: ID!
+    _id: ID!
     username: String!
     email: String!
-    created_at: String!
+    password: String
+    resumes: [Resume]!
   }
 
   type Resume {
-    resume_id: ID!
-    user_id: ID!
+    _id: ID!
     title: String!
-    content: String
-    created_at: String!
-    updated_at: String
+    objective: String
+    education: [Education]
+    experience: [Experience]
+    skills: [String]
+    user: User!
   }
 
-  type SavedResume {
-    saved_id: ID!
-    user_id: ID!
-    resume_id: ID!
-    saved_at: String!
+  type Education {
+    _id: ID!
+    institution: String!
+    degree: String!
+    startDate: String!
+    endDate: String
+  }
+
+  type Experience {
+    _id: ID!
+    company: String!
+    position: String!
+    startDate: String!
+    endDate: String
+    description: String
+  }
+
+  input ResumeInput {
+    title: String!
+    objective: String
+    education: [EducationInput]
+    experience: [ExperienceInput]
+    skills: [String]
+  }
+
+  input EducationInput {
+    institution: String!
+    degree: String!
+    startDate: String!
+    endDate: String
+  }
+
+  input ExperienceInput {
+    company: String!
+    position: String!
+    startDate: String!
+    endDate: String
+    description: String
   }
 
   type Query {
-    getUser(userId: ID!): User
-    getResume(resumeId: ID!): Resume
-    getAllResumes: [Resume]
-    getSavedResumes(userId: ID!): [SavedResume]
+    users: [User]
+    user(username: String!): User
+    me: User
+    resume(resumeId: ID!): Resume
+    resumes: [Resume]
   }
 
   type Mutation {
-    createUser(username: String!, email: String!, password: String!): User
-    createResume(userId: ID!, title: String!, content: String): Resume
-    updateResume(resumeId: ID!, title: String, content: String): Resume
-    deleteResume(resumeId: ID!): Boolean
-    saveResume(userId: ID!, resumeId: ID!): SavedResume
-    unsaveResume(savedId: ID!): Boolean
-    loginUser(email: String!, password: String!): AuthData
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    createResume(resumeInput: ResumeInput!): Resume
   }
 
-  type AuthData {
-    user: User!
-    token: String!
+  type Auth {
+    token: ID!
+    user: User
   }
 `;
 

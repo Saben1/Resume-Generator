@@ -19,26 +19,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  full_name: {
-    type: String,
-    required: true,
-  },
-  contact_information: {
-    type: String,
-    required: true,
-  },
-  education: {
-    type: String,
-    required: true,
-  },
-  work_experience: {
-    type: String,
-    required: true,
-  },
-  skills: {
-    type: String,
-    required: true,
-  },
+  resumes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Resume',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {
