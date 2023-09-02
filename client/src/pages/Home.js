@@ -1,26 +1,41 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React, { useState } from 'react';
 import ResumeGenerator from '../components/ResumeGenerator';
-import { GET_MY_RESUME } from '../utils/queries'; // Import the query you want to use
+import Signup from './Signup'; // Import the Signup component
+import Auth from '../utils/auth'; // Import the Auth utility
 
 const Home = () => {
-  // Use the useQuery hook to fetch data
-  const { loading, error, data } = useQuery(GET_MY_RESUME);
+  const [startClicked, setStartClicked] = useState(false);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleStartClick = () => {
+    setStartClicked(true);
+  };
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  const resumeData = data?.myResume || null; // Replace myResume with the actual field name in your query
+  const resumeData = {
+    title: '',
+    objective: '',
+    educationData: [],
+    experienceData: [],
+    skillsData: [],
+  };
 
   return (
     <div>
-      {/* Pass the resume data to the ResumeGenerator component */}
-      <ResumeGenerator resumeData={resumeData} />
+      {!startClicked ? (
+        <div>
+          <h1>Welcome to Resume Generator</h1>
+          <p>Press the "Start" button to begin creating your resume.</p>
+          <button
+            className="btn btn-lg btn-info m-2 start-button"
+            onClick={handleStartClick}
+          >
+            Start
+          </button>
+        </div>
+      ) : Auth.loggedIn() ? ( // Check if the user is logged in
+        <ResumeGenerator resumeData={resumeData} />
+      ) : (
+        <Signup /> // Display Signup component if not logged in
+      )}
     </div>
   );
 };
