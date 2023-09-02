@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import ResumeGenerator from '../components/ResumeGenerator';
+import PersonalInformation from '../components/PersonalInformation'; // Updated component name
 import Signup from './Signup'; // Import the Signup component
 import Auth from '../utils/auth'; // Import the Auth utility
 
 const Home = () => {
   const [startClicked, setStartClicked] = useState(false);
+  const [showPersonalInformation, setShowPersonalInformation] = useState(false); // Updated state variable name
 
   const handleStartClick = () => {
     setStartClicked(true);
+    setShowPersonalInformation(true); // Show the Personal Information form when "Start" is clicked
   };
 
   const resumeData = {
@@ -31,10 +33,10 @@ const Home = () => {
             Start
           </button>
         </div>
-      ) : Auth.loggedIn() ? ( // Check if the user is logged in
-        <ResumeGenerator resumeData={resumeData} />
-      ) : (
-        <Signup /> // Display Signup component if not logged in
+      ) : Auth.loggedIn() && showPersonalInformation ? (
+        <PersonalInformation />
+      ) :  (
+        <Signup />
       )}
     </div>
   );
