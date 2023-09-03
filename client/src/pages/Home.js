@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import PersonalInformation from '../components/PersonalInformation'; // Updated component name
-import Education from '../components/Education'; // Import the Education component
-import Experience from '../components/Experience'; // Import the Experience component
-import Skills from '../components/Skills'; // Import the Skills component
 import Signup from './Signup'; // Import the Signup component
 import Auth from '../utils/auth'; // Import the Auth utility
 
@@ -16,7 +13,11 @@ const Home = () => {
   };
 
   const resumeData = {
-    
+    educationData: [],
+    experienceData: [],
+    skillsData: [],
+    previewResume:[]
+
   };
 
   return (
@@ -34,11 +35,9 @@ const Home = () => {
         </div>
       ) : Auth.loggedIn() && showPersonalInformation ? (
         <PersonalInformation />
-      ) : Auth.loggedIn() ? (
+      ) :  (
         <Signup />
-      ) : null}
-      {/* Render components for resume generation process */}
-      {/* ... Previous code for rendering resume generation steps */}
+      )}
     </div>
   );
 };

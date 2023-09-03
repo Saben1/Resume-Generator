@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import './PersonalInformation.css'; // Import the CSS file
+import { useMutation } from '@apollo/client'; // Import useMutation
+import { Link, useNavigate } from 'react-router-dom';
+import { CREATE_PERSONALINFO } from '../../utils/mutations'; // Import your GraphQL mutation query
 
-const PersonalInformation = ({ onNext }) => {
-  const navigate = useNavigate(); // Initialize useNavigate
+const PersonalInformation = () => {
+  const navigate = useNavigate();
 
   const [personalInfo, setPersonalInfo] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
+    address: '',
   });
+
+  const [createResume] = useMutation(CREATE_PERSONALINFO); // Initialize the mutation
 
   const handlePersonalInfoChange = (e) => {
     const { name, value } = e.target;
@@ -20,12 +24,33 @@ const PersonalInformation = ({ onNext }) => {
     });
   };
 
-  const handleNextClick = () => {
-    if (personalInfo.firstName && personalInfo.lastName && personalInfo.email && personalInfo.phone) {
-      onNext(personalInfo);
-      navigate('/education'); // Use navigate to navigate to the desired route
+  const handleNextClick = async () => {
+    if (
+      personalInfo.firstName &&
+      personalInfo.lastName &&
+      personalInfo.email &&
+      personalInfo.phone &&
+      personalInfo.address
+    ) {
+      try {
+        // Call the mutation to save the user's personal information
+        const { data } = await createResume({
+          variables: { input: personalInfo },
+        });
+
+        // Check the response from the mutation for success
+        if (data.createResume) {
+          // Redirect to the next step or a success page
+          navigate('/education');
+        } else {
+          alert('Failed to save personal information. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error saving personal information:', error);
+        alert('An error occurred. Please try again later.');
+      }
     } else {
-      alert('Please fill in all fields.');
+      alert('Please fill in all required fields.');
     }
   };
 
@@ -84,10 +109,12 @@ const PersonalInformation = ({ onNext }) => {
           name="address"
           value={personalInfo.address}
           onChange={handlePersonalInfoChange}
-          required
         />
       </div>
-      <button className="btn btn-lg btn-info m-2" onClick={handleNextClick}>
+      <button
+        className="btn btn-lg btn-info m-2"
+        onClick={handleNextClick}
+      >
         Next
       </button>
     </div>

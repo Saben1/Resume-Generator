@@ -27,6 +27,61 @@ export const ADD_USER = gql`
   }
 `;
 
+// Mutation to create personal information
+export const CREATE_PERSONALINFO = gql`
+  mutation createPersonalInfo($input: PersonalInfoInput!) {
+    createPersonalInfo(input: $input) {
+      _id
+      firstName
+      lastName
+      email
+      phone
+      address
+    }
+  }
+`;
+
+// Mutation to create skills
+export const CREATE_SKILLS = gql`
+  mutation createSkills($input: [String!]!) {
+    createSkills(input: $input) {
+      _id
+      skills
+    }
+  }
+`;
+
+// Mutation to create education
+export const CREATE_EDUCATION = gql`
+  mutation createEducation($input: [EducationInput!]!) {
+    createEducation(input: $input) {
+      _id
+      education {
+        institution
+        degree
+        startDate
+        endDate
+      }
+    }
+  }
+`;
+
+// Mutation to create experience
+export const CREATE_EXPERIENCE = gql`
+  mutation createExperience($input: [ExperienceInput!]!) {
+    createExperience(input: $input) {
+      _id
+      experience {
+        company
+        position
+        startDate
+        endDate
+        description
+      }
+    }
+  }
+`;
+
 // Mutation to create a new resume
 export const CREATE_RESUME = gql`
   mutation createResume($title: String!, $objective: String, $education: [EducationInput], $experience: [ExperienceInput], $skills: [String]) {
@@ -39,7 +94,15 @@ export const CREATE_RESUME = gql`
     }) {
       _id
       title
-      objective
+      personalinformation {
+        _id
+        firstName
+        lastName
+        email
+        phone
+        address
+
+      }
       education {
         _id
         institution
@@ -53,7 +116,6 @@ export const CREATE_RESUME = gql`
         position
         startDate
         endDate
-        description
       }
       skills
       user {
@@ -78,7 +140,7 @@ export const UPDATE_RESUME = gql`
       resumeId: $resumeId
       resumeInput: {
         title: $title
-        objective: $objective
+        personalinformation: $personalinformation
         education: $education
         experience: $experience
         skills: $skills
@@ -86,7 +148,14 @@ export const UPDATE_RESUME = gql`
     ) {
       _id
       title
-      objective
+      personalinformation {
+        _id
+        firstName
+        lastName
+        email
+        phone
+        address
+      }
       education {
         _id
         institution
@@ -100,7 +169,6 @@ export const UPDATE_RESUME = gql`
         position
         startDate
         endDate
-        description
       }
       skills
       user {

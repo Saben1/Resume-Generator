@@ -1,0 +1,38 @@
+/* PersonalInformation.css */
+
+/* Container styles */
+.experience-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Form styles */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  /* Label styles */
+  label {
+    font-weight: bold;
+  }
+  
+  /* Input styles */
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .btn {
+    margin-right: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
