@@ -17,14 +17,7 @@ const Footer = () => {
         )}
         <h4>
         Empowering job seekers worldwide with polished resumes, courtesy of the Resume Generator App  {' '}
-          <span
-            className="emoji"
-            role="img"
-            aria-label="heart"
-            aria-hidden="false"
-          >
-            ❤️
-          </span>{' '}
+          {' '}
         </h4>
       </div>
     </footer>

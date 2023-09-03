@@ -1,0 +1,24 @@
+[
+    {
+      "company": "TechCorp Inc.",
+      "position": "Software Engineer",
+      "startDate": "2019-06-01",
+      "endDate": "2021-12-31",
+      "description": "Worked on web application development using React and Node.js."
+    },
+    {
+      "company": "InnovateTech",
+      "position": "Senior Software Developer",
+      "startDate": "2022-02-01",
+      "endDate": "2023-08-31",
+      "description": "Led a team of developers on various projects, specializing in full-stack development."
+    },
+    {
+      "company": "Code Wizards",
+      "position": "Frontend Developer",
+      "startDate": "2020-01-15",
+      "endDate": "2020-12-31",
+      "description": "Developed responsive and user-friendly web interfaces using HTML, CSS, and JavaScript."
+    }
+  ]
+  

@@ -5,14 +5,12 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
-    password: String
-    resumes: [Resume]!
+    resumes: [Resume]
   }
 
   type Resume {
     _id: ID!
     title: String!
-    objective: String
     education: [Education]
     experience: [Experience]
     skills: [String]
@@ -36,9 +34,13 @@ const typeDefs = gql`
     description: String
   }
 
+  type Auth {
+    token: ID!
+    user: User!
+  }
+
   input ResumeInput {
     title: String!
-    objective: String
     education: [EducationInput]
     experience: [ExperienceInput]
     skills: [String]
@@ -71,11 +73,6 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     createResume(resumeInput: ResumeInput!): Resume
-  }
-
-  type Auth {
-    token: ID!
-    user: User
   }
 `;
 

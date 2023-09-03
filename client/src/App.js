@@ -14,8 +14,10 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import ResumeGenerator from './components/ResumeGenerator'; // Import your ResumeGenerator component
-import PersonalInformation from './components/PersonalInformation'; // Import your PersonalInformation component
+import PersonalInformation from './components/PersonalInformation';
+import Education from './components/Education'; // Import the Education component
+import Experience from './components/Experience'; // Import the Experience component
+import Skills from './components/Skills'; // Import the Skills component
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -66,18 +68,29 @@ function App() {
                 element={<Profile />}
               />
               <Route 
-                path="/profiles/:username"
+                path="/profiles"
                 element={<Profile />}
-              />
-              <Route 
-                path="/generate-resume"
-                element={<ResumeGenerator />}
               />
               {/* Add a route for the PersonalInformation component */}
               <Route 
                 path="/personal-information"
                 element={<PersonalInformation />}
               />
+              {/* Add routes for the Education, Experience, and Skills components */}
+              <Route 
+                path="/education"
+                element={<Education />}
+              />
+              <Route 
+                path="/experience"
+                element={<Experience />}
+              />
+              <Route 
+                path="/skills"
+                element={<Skills />}
+              />
+              
+
             </Routes>
           </div>
           <Footer />

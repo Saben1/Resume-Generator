@@ -1,0 +1,21 @@
+[
+    {
+      "institution": "University of Tech",
+      "degree": "Bachelor of Science in Computer Science",
+      "startDate": "2015-09-01",
+      "endDate": "2019-05-15"
+    },
+    {
+      "institution": "Tech Institute",
+      "degree": "Master of Science in Software Engineering",
+      "startDate": "2020-08-01",
+      "endDate": "2022-05-30"
+    },
+    {
+      "institution": "Coding Academy",
+      "degree": "Web Development Certification",
+      "startDate": "2021-03-15",
+      "endDate": "2021-09-30"
+    }
+  ]
+  

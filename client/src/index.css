@@ -1706,3 +1706,10 @@ label form [type='radio'] {
     align-content: center;
   }
 }
+.container {
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

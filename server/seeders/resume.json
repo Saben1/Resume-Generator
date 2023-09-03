@@ -1,0 +1,24 @@
+[
+    {
+      "title": "John Doe's Resume",
+      "education": "education.json",
+      "experience": "experience.json",
+      "skills": "skills.json",
+      "user": "users.json"
+    },
+    {
+      "title": "Jane Smith's Resume",
+      "education": "education2.json",
+      "experience": "experience2.json",
+      "skills": "skills2.json",
+      "user": "users.json"
+    },
+    {
+      "title": "Alice Johnson's Resume",
+      "education": "education3.json",
+      "experience": "experience3.json",
+      "skills": "skills3.json",
+      "user": "users.json"
+    }
+  ]
+  

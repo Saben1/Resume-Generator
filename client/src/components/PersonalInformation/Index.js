@@ -23,7 +23,7 @@ const PersonalInformation = ({ onNext }) => {
   const handleNextClick = () => {
     if (personalInfo.firstName && personalInfo.lastName && personalInfo.email && personalInfo.phone) {
       onNext(personalInfo);
-      navigate('/generate-resume'); // Use navigate to navigate to the desired route
+      navigate('/education'); // Use navigate to navigate to the desired route
     } else {
       alert('Please fill in all fields.');
     }
@@ -76,41 +76,22 @@ const PersonalInformation = ({ onNext }) => {
           required
         />
       </div>
-      <button type="button" className="btn btn-primary" onClick={handleNextClick}>
+      <div className="form-group">
+        <label>Address:</label>
+        <input
+          type="text"
+          className="form-control"
+          name="address"
+          value={personalInfo.address}
+          onChange={handlePersonalInfoChange}
+          required
+        />
+      </div>
+      <button className="btn btn-lg btn-info m-2" onClick={handleNextClick}>
         Next
       </button>
     </div>
   );
 };
 
-const ResumeGenerator = ({ personalInfo }) => {
-  return (
-    <div>
-      <h3>Resume Generator</h3>
-      <p>Generated Resume:</p>
-      <pre>{JSON.stringify(personalInfo, null, 2)}</pre>
-    </div>
-  );
-};
-
-const Home = () => {
-  const [showResumeGenerator, setShowResumeGenerator] = useState(false);
-  const [personalInfo, setPersonalInfo] = useState(null);
-
-  const handleNext = (data) => {
-    setPersonalInfo(data);
-    setShowResumeGenerator(true);
-  };
-
-  return (
-    <div>
-      {showResumeGenerator ? (
-        <ResumeGenerator personalInfo={personalInfo} />
-      ) : (
-        <PersonalInformation onNext={handleNext} />
-      )}
-    </div>
-  );
-};
-
-export default Home;
+export default PersonalInformation;
