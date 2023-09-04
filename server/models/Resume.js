@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const personalInformationSchema = new Schema({
+const personalinfoSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -99,39 +99,13 @@ const skillsSchema = new Schema({
   },
 });
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    match: [/.+@.+\..+/, 'Must match an email address!'],
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 5,
-  },
-  resumes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Resume',
-    },
-  ],
-});
-
 const resumeSchema = new Schema({
   title: {
     type: String,
     required: true,
     trim: true,
   },
-  personalInformation: personalInformationSchema,
+  personalinfo: [personalinfoSchema],
   education: [educationSchema],
   experience: [experienceSchema],
   skills: [skillsSchema],

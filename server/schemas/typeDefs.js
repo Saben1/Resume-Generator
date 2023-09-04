@@ -10,8 +10,7 @@ const typeDefs = gql`
 
   type Resume {
     _id: ID!
-    title: String!
-    personalinfo: [Personalinfo]
+    personalinfo: Personalinfo!
     education: [Education]
     experience: [Experience]
     skills: [String]
@@ -21,8 +20,6 @@ const typeDefs = gql`
   type Education {
     _id: ID!
     institution: String!
-
-
     degree: String!
     startDate: String!
     endDate: String
@@ -34,7 +31,6 @@ const typeDefs = gql`
     position: String!
     startDate: String!
     endDate: String
-    description: String
   }
 
   type Auth {
@@ -42,14 +38,22 @@ const typeDefs = gql`
     user: User!
   }
 
+  type Personalinfo {
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    address: String
+  }
+
   input ResumeInput {
-    title: String!
+    personalinfo: PersonalinfoInput!
     education: [EducationInput]
     experience: [ExperienceInput]
     skills: [String]
   }
 
-  input Personalinfo{
+  input PersonalinfoInput {
     firstName: String!
     lastName: String!
     email: String!
@@ -69,7 +73,6 @@ const typeDefs = gql`
     position: String!
     startDate: String!
     endDate: String
-    description: String
   }
 
   type Query {
@@ -84,10 +87,6 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     createResume(resumeInput: ResumeInput!): Resume
-    createPersonalinfo(personalinfoInput: PersonalinfoInput!): Personalinfo
-    createEducation(educationInput: EducationInput!): Education
-    createExperience(experienceInput: ExperienceInput!): Experience
-    createSkills(skillsInput: SkillsInput!): Skills
   }
 `;
 

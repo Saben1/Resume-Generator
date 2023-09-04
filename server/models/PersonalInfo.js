@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const personalInformationSchema = new Schema({
+const personalinfoSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -32,6 +32,6 @@ const personalInformationSchema = new Schema({
   },
 });
 
-const PersonalInformation = model('PersonalInformation', personalInformationSchema);
+const Personalinfo = model('Personalinfo', personalinfoSchema);
 
-module.exports = PersonalInformation;
+module.exports = Personalinfo;
