@@ -13,8 +13,7 @@ const Header = () => {
     <header className="bg-dark text-light mb-4 py-3 flex-row align-center">
       <div className="container flex-row justify-space-between-lg justify-center align-center">
         <div>
-          <Link className="text-light text-decoration-none">
-            {/* Wrap the "Resume Generator" header in a Link */}
+          <Link className="text-light text-decoration-none" to="/">
             <h1 className="m-0">Resume Generator</h1>
           </Link>
           <p className="m-0">Elevate Your Professional Profile with Expertly Crafted Resumes <br />– Your Perfect Resume Awaits!</p> 

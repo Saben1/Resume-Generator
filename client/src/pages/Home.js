@@ -12,14 +12,6 @@ const Home = () => {
     setShowPersonalInformation(true); // Show the Personal Information form when "Start" is clicked
   };
 
-  const resumeData = {
-    educationData: [],
-    experienceData: [],
-    skillsData: [],
-    previewResume:[]
-
-  };
-
   return (
     <div>
       {!startClicked ? (
@@ -33,10 +25,10 @@ const Home = () => {
             Start
           </button>
         </div>
-      ) : Auth.loggedIn() && showPersonalInformation ? (
+      ) : showPersonalInformation ? (
         <PersonalInformation />
       ) :  (
-        <Signup />
+        <PersonalInformation />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 // Query to fetch the logged-in user's data
-export const GET_ME = gql`
+export const QUERY_ME = gql`
   query me {
     me {
       _id
@@ -12,7 +12,7 @@ export const GET_ME = gql`
 `;
 
 // Query to fetch all users
-export const GET_USERS = gql`
+export const QUERY_USER = gql`
   query users {
     users {
       _id

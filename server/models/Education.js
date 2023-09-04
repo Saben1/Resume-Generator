@@ -1,29 +1,23 @@
+// models/education.js
 const { Schema, model } = require('mongoose');
 
-const educationSchema = new Schema({
-  institution: {
-    type: String,
-    required: true,
-    trim: true,
+const educationSchema = new Schema(
+  {
+    institution: String,
+    degree: String,
+    startDate: String,
+    endDate: String,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
-  degree: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  startDate: {
-    type: String,
-    required: true,
-  },
-  endDate: {
-    type: String,
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-});
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
 
 const Education = model('Education', educationSchema);
 

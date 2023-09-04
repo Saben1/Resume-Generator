@@ -25,33 +25,34 @@ const PersonalInformation = () => {
   };
 
   const handleNextClick = async () => {
-    if (
-      personalInfo.firstName &&
-      personalInfo.lastName &&
-      personalInfo.email &&
-      personalInfo.phone &&
-      personalInfo.address
-    ) {
-      try {
-        // Call the mutation to save the user's personal information
-        const { data } = await createResume({
-          variables: { input: personalInfo },
-        });
+    navigate('/education');
+    // if (
+    //   personalInfo.firstName &&
+    //   personalInfo.lastName &&
+    //   personalInfo.email &&
+    //   personalInfo.phone &&
+    //   personalInfo.address
+    // ) {
+    //   try {
+    //     // Call the mutation to save the user's personal information
+    //     const { data } = await createResume({
+    //       variables: { input: personalInfo },
+    //     });
 
-        // Check the response from the mutation for success
-        if (data.createResume) {
-          // Redirect to the next step or a success page
-          navigate('/education');
-        } else {
-          alert('Failed to save personal information. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error saving personal information:', error);
-        alert('An error occurred. Please try again later.');
-      }
-    } else {
-      alert('Please fill in all required fields.');
-    }
+    //     // Check the response from the mutation for success
+    //     if (data.createResume) {
+    //       // Redirect to the next step or a success page
+    //       navigate('/education');
+    //     } else {
+    //       alert('Failed to save personal information. Please try again.');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error saving personal information:', error);
+    //     alert('An error occurred. Please try again later.');
+    //   }
+    // } else {
+    //   alert('Please fill in all required fields.');
+    // }
   };
 
   return (

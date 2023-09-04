@@ -38,21 +38,22 @@ const Experience = () => {
   };
 
   const handleNextClick = async () => {
-    try {
-      // Call the mutation to save experience information
-      const { data } = await createExperience({
-        variables: { input: { experience: experienceData } }, // Pass the experience data as an array
-      });
+    navigate('/skills');
+    // try {
+    //   // Call the mutation to save experience information
+    //   const { data } = await createExperience({
+    //     variables: { input: { experience: experienceData } }, // Pass the experience data as an array
+    //   });
 
-      if (data.createExperience) {
-        navigate('/skills'); // Navigate to the Skills component
-      } else {
-        alert('Failed to save experience information. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error saving experience information:', error);
-      alert('An error occurred. Please try again later.');
-    }
+    //   if (data.createExperience) {
+    //     navigate('/skills'); // Navigate to the Skills component
+    //   } else {
+    //     alert('Failed to save experience information. Please try again.');
+    //   }
+    // } catch (error) {
+    //   console.error('Error saving experience information:', error);
+    //   alert('An error occurred. Please try again later.');
+    // }
   };
 
   return (

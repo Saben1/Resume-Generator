@@ -38,21 +38,22 @@ const Education = () => {
   };
 
   const handleNextClick = async () => {
-    try {
-      // Call the mutation to save education information
-      const { data } = await createEducation({
-        variables: { input: { education: educationData } }, // Pass the education data as an array
-      });
+    navigate('/experience');
+    // try {
+    //   // Call the mutation to save education information
+    //   const { data } = await createEducation({
+    //     variables: { input: { education: educationData } }, // Pass the education data as an array
+    //   });
 
-      if (data.createEducation) {
-        navigate('/experience'); // Navigate to the Experience component
-      } else {
-        alert('Failed to save education information. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error saving education information:', error);
-      alert('An error occurred. Please try again later.');
-    }
+    //   if (data.createEducation) {
+    //     navigate('/experience'); // Navigate to the Experience component
+    //   } else {
+    //     alert('Failed to save education information. Please try again.');
+    //   }
+    // } catch (error) {
+    //   console.error('Error saving education information:', error);
+    //   alert('An error occurred. Please try again later.');
+    // }
   };
 
   return (

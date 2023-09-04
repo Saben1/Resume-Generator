@@ -1,3 +1,4 @@
+// schemas/typeDefs.js
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
@@ -10,10 +11,10 @@ const typeDefs = gql`
 
   type Resume {
     _id: ID!
-    personalinfo: Personalinfo!
+    information: Information!
     education: [Education]
     experience: [Experience]
-    skills: [String]
+    skills: [Skills]
     user: User!
   }
 
@@ -33,12 +34,17 @@ const typeDefs = gql`
     endDate: String
   }
 
+  type Skills {
+    _id: ID!
+    name: String!
+  }
+
   type Auth {
     token: ID!
     user: User!
   }
 
-  type Personalinfo {
+  type Information {
     firstName: String!
     lastName: String!
     email: String!
@@ -47,13 +53,13 @@ const typeDefs = gql`
   }
 
   input ResumeInput {
-    personalinfo: PersonalinfoInput!
+    information: InformationInput!
     education: [EducationInput]
     experience: [ExperienceInput]
-    skills: [String]
+    skills: [SkillsInput]
   }
 
-  input PersonalinfoInput {
+  input InformationInput {
     firstName: String!
     lastName: String!
     email: String!
@@ -75,18 +81,32 @@ const typeDefs = gql`
     endDate: String
   }
 
+  input SkillsInput {
+    name: String!
+  }
+
   type Query {
     users: [User]
     user(username: String!): User
     me: User
-    resume(resumeId: ID!): Resume
     resumes: [Resume]
+    resume(resumeId: ID!): Resume
+    educations: [Education]
+    education(educationId: ID!): Education
+    experiences: [Experience]
+    experience(experienceId: ID!): Experience
+    skills: [Skills]
+    information: Information
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     createResume(resumeInput: ResumeInput!): Resume
+    createEducation(educationInput: EducationInput!): Education
+    createExperience(experienceInput: ExperienceInput!): Experience
+    createSkills(skillsInput: SkillsInput!): Skills
+    updateInformation(informationInput: InformationInput!): Information
   }
 `;
 

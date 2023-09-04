@@ -1,12 +1,12 @@
-const Personalinfo = require('./personalinfo');
-const Education = require('./education');
-const Experience = require('./experience');
-const Skills = require('./skills');
-const User = require('./user');
-const Resume = require('./resume');
+const Information = require('./Information');
+const Education = require('./Education');
+const Experience = require('./Experience');
+const Skills = require('./Skills');
+const User = require('./User');
+const Resume = require('./Resume');
 
 module.exports = {
-  Personalinfo,
+  Information,
   Education,
   Experience,
   Skills,

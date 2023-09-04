@@ -1,17 +1,20 @@
+// models/skills.js
 const { Schema, model } = require('mongoose');
 
-const skillsSchema = new Schema({
-  skillName: {
-    type: String,
-    required: true,
-    trim: true,
+const skillsSchema = new Schema(
+  {
+    name: String,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-});
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
 
 const Skills = model('Skills', skillsSchema);
 

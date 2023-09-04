@@ -18,7 +18,7 @@ import PersonalInformation from './components/PersonalInformation';
 import Education from './components/Education'; // Import the Education component
 import Experience from './components/Experience'; // Import the Experience component
 import Skills from './components/Skills'; // Import the Skills component
-
+import Display from './components/Display';
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -88,6 +88,10 @@ function App() {
               <Route 
                 path="/skills"
                 element={<Skills />}
+              />
+                <Route 
+                path="/preview"
+                element={<Display />}
               />
             </Routes>
           </div>
