@@ -14,10 +14,11 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Skills from './components/Skills'; // Import the Skills component
 import PersonalInformation from './components/PersonalInformation';
 import Education from './components/Education'; // Import the Education component
 import Experience from './components/Experience'; // Import the Experience component
-import Skills from './components/Skills'; // Import the Skills component
+
 import Display from './components/Display';
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
