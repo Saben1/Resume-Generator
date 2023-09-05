@@ -13,29 +13,31 @@ const Signup = () => {
     password: '',
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
-
+  
   const handleChange = (event) => {
+    
     const { name, value } = event.target;
-
+    
     setFormState({
       ...formState,
       [name]: value,
     });
   };
-
+  
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
-    try {
-      const { data } = await addUser({
-        variables: { ...formState },
-      });
+    // try {
+    console.log("entered handle states");
+    const { data } = await addUser({
+      variables: { ...formState },
+    });
+    console.log("add user defined");
 
-      Auth.login(data.addUser.token);
-    } catch (e) {
-      console.error(e);
-    }
+    Auth.login(data.addUser.token);
+    // } catch (e) {
+    //   console.error(e);
+    // }
   };
 
   return (

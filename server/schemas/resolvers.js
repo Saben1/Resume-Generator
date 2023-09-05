@@ -51,13 +51,16 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
-      try {
-        const user = await User.create({ username, email, password });
-        const token = signToken(user);
-        return { token, user };
-      } catch (error) {
-        throw new UserInputError('User registration failed', { errors: error.errors });
-      }
+      // try {
+      console.log("resolver ma user register gane");
+      const user = await User.create({ username, email, password });
+      console.log("user create bhayo");
+      const token = signToken(user);
+      console.log(token);
+      return { token, user };
+      // } catch (error) {
+      //   throw new UserInputError('User registration failed', { errors: error.errors });
+      // }
     },
     login: async (parent, { email, password }) => {
       try {
