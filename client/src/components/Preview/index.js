@@ -3,7 +3,7 @@ import Education from '../Education';
 import Information from '../Information';
 import Experience from '../Experience';
 import Skills from '../Skills';
-import { GET_INFORMATION } from '../../utils/queries';
+import { GET_INFORMATION, GET_SKILLS } from '../../utils/queries';
 import { GET_EDUCATION } from '../../utils/queries';
 import { GET_EXPERIENCE } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
@@ -30,15 +30,18 @@ const ResumePreview = () => {
 
  
 
-  const {data: informationdata, loading: informationloading, error: informationerror} = useQuery(GET_INFORMATION);
+  const {data: informationdata, loading: informationloading, error: informationerror,} = useQuery(GET_INFORMATION);
   const {data: educationdata, loading: educationloading, error: educationerror} = useQuery(GET_EDUCATION);
- 
+  const {data: experiencedata, loading: experienceloading, error: experienceerror} = useQuery(GET_EXPERIENCE);
+  const {data: skillsdata, loading: skillsloading, error: skillserror} = useQuery(GET_SKILLS);
 
-  if (informationloading || educationloading ) return 'Loading...';
-  if (informationerror || educationerror ) return 'Error!'; 
+  if (informationloading || educationloading || experienceloading || skillsloading ) return 'Loading...';
+  if (informationerror || educationerror || experienceerror|| skillserror ) return 'Error!'; 
 
   const { information } = informationdata;
   const { education } = educationdata;
+  const { experience } = experiencedata;
+  const { skills } = skillsdata;
 
   return(
 
@@ -61,30 +64,24 @@ const ResumePreview = () => {
           <p>Start Date: {education.startDate}</p>
           <p>End Date: {education.endDate}</p>
         </div>
+
+        <div>
+          <h3><strong>Experience:</strong></h3>
+          <p>Company: {experience.company}</p>
+          <p>Position: {experience.position}</p>
+          <p>Start Date: {experience.startDate}</p>
+          <p>End Date: {experience.endDate}</p>
         </div>
 
-        <button className=" btn btn-sm btn-info">
-                Save
-        </button>
+        <div>
+          <h3><strong>Skills:</strong></h3>
+          <p>Skill: {skills.skill}</p>
+        </div>
+
+        </div>
       </div>
   );
   }
 // }
 
 export default ResumePreview;
-
-
-{/* 
-
-        <div>
-          <h3><strong>Experience:</strong></h3>
-          <p>Company: {experience.company}</p>
-          <p>Start Date: {experience.startDate}</p>
-          <p>End Date: {experience.endDate}</p>
-        
-        </div>
-
-        <div>
-          <h3><strong>Skills:</strong></h3>
-          <p>Skill: {Skills.skill}</p>
-        </div> */}
