@@ -45,10 +45,11 @@ const typeDefs = gql`
   }
 
   type Information {
-    firstName: String!
-    lastName: String!
-    email: String!
-    phone: String!
+    _id: ID
+    firstName: String
+    lastName: String
+    email: String
+    phone: String
     address: String
   }
 
@@ -107,6 +108,7 @@ const typeDefs = gql`
     createExperience(experienceInput: ExperienceInput!): Experience
     createSkills(skillsInput: SkillsInput!): Skills
     updateInformation(informationInput: InformationInput!): Information
+    createInformation(firstname: String!, lastName: String!, email: String!, phone: String!, address: String! ): Information
   }
 `;
 

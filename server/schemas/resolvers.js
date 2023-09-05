@@ -83,6 +83,26 @@ const resolvers = {
         throw new AuthenticationError('Login failed');
       }
     },
+    createInformation: async (parent, {firstName, lastName, email, phone, address }, context) => {
+      // try {
+        console.log(context.body.variables.firstName);
+
+        // if (context.user) {
+          // console.log(informationInput);
+          // console.log("this is it");
+          // console.log(firstName.firstName);
+          const information = await Information.create({
+            firstName: context.body.variables.firstName, lastName: context.body.variables.lastName, email: context.body.variables.email, phone: context.body.variables.phone, address: context.body.variables.address,
+            user: context.user._id,
+          });
+          console.log("information");
+          return information;
+        // }
+        // throw new AuthenticationError('You need to be logged in!');
+      // } catch (error) {
+      //   throw new UserInputError('Failed to create information', { errors: error.errors });
+      // }
+    },
     createResume: async (parent, { resumeInput }, context) => {
       try {
         if (context.user) {

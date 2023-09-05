@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client'; // Import useMutation
 import { Link, useNavigate } from 'react-router-dom';
-import { CREATE_PERSONALINFO } from '../../utils/mutations'; // Import your GraphQL mutation query
+import { CREATE_INFORMATION } from '../../utils/mutations'; // Import your GraphQL mutation query
 
 const Information = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Information = () => {
     address: '',
   });
 
-  const [createResume] = useMutation(CREATE_PERSONALINFO); // Initialize the mutation
+    const [createInformation, {error, data }] = useMutation(CREATE_INFORMATION); // Initialize the mutation
 
   const handleInformationChange = (e) => {
     const { name, value } = e.target;
@@ -22,37 +22,20 @@ const Information = () => {
       ...information,
       [name]: value,
     });
+
   };
 
-  const handleNextClick = async () => {
+  const handleNextClick = async (event) => {
+    event.preventDefault();
+    console.log(information.firstName);
+    const { data } = await createInformation(
+      {
+        variables: { ...information}
+      }
+    );
+    console.log(data);
+    console.log("data aayo");
     navigate('/education');
-    // if (
-    //   information.firstName &&
-    //   information.lastName &&
-    //   information.email &&
-    //   information.phone &&
-    //   information.address
-    // ) {
-    //   try {
-    //     // Call the mutation to save the user's personal information
-    //     const { data } = await createResume({
-    //       variables: { input: information },
-    //     });
-
-    //     // Check the response from the mutation for success
-    //     if (data.createResume) {
-    //       // Redirect to the next step or a success page
-    //       navigate('/education');
-    //     } else {
-    //       alert('Failed to save personal information. Please try again.');
-    //     }
-    //   } catch (error) {
-    //     console.error('Error saving personal information:', error);
-    //     alert('An error occurred. Please try again later.');
-    //   }
-    // } else {
-    //   alert('Please fill in all required fields.');
-    // }
   };
 
   return (

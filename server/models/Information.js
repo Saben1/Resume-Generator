@@ -3,11 +3,40 @@ const { Schema, model } = require('mongoose');
 
 const informationSchema = new Schema(
   {
-    firstName: String,
-    lastName: String,
-    email: String,
-    phone: String,
-    address: String,
+    firstName: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+
+    lastName: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+
+    phone: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+
+    address: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',

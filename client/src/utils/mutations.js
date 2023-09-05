@@ -24,10 +24,11 @@ export const ADD_USER = gql`
   }
 `;
 
+
 // Mutation to create personal information
-export const CREATE_PERSONALINFO = gql`
-  mutation createPersonalInfo($input: PersonalInfoInput!) {
-    createPersonalInfo(input: $input) {
+export const CREATE_INFORMATION = gql`
+  mutation createInformation($firstName: String!, $lastName: String!, $email: String!, $phone: String!, $address: String! ) {
+    createInformation(firstname: $firstName, lastName: $lastName, email: $email, phone: $phone, address: $address) {
       _id
       firstName
       lastName
