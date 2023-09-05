@@ -3,7 +3,11 @@ const { Schema, model } = require('mongoose');
 
 const skillsSchema = new Schema(
   {
-    name: String,
+    skill:  {
+      type: String,
+      required: true,
+      trim: true,
+    },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',

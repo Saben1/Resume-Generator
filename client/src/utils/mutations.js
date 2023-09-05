@@ -41,41 +41,36 @@ export const CREATE_INFORMATION = gql`
 
 // Mutation to create skills
 export const CREATE_SKILLS = gql`
-  mutation createSkills($input: [String!]!) {
-    createSkills(input: $input) {
+  mutation createSkill($skill: String! ) {
+    createSkills(skill: $skill) {
       _id
-      skills
+      skill
     }
   }
 `;
 
 // Mutation to create education
 export const CREATE_EDUCATION = gql`
-  mutation createEducation($input: [EducationInput!]!) {
-    createEducation(input: $input) {
+  mutation createEducation($institution: String!, $degree: String!, $startDate: String!, $endDate: String! ) {
+    createEducation(institution: $institution, degree: $degree, startDate: $startDate, endDate: $endDate) {
       _id
-      education {
         institution
         degree
         startDate
         endDate
-      }
     }
   }
 `;
 
 // Mutation to create experience
 export const CREATE_EXPERIENCE = gql`
-  mutation createExperience($input: [ExperienceInput!]!) {
-    createExperience(input: $input) {
+  mutation createExperience($company: String!, $position: String!, $startDate: String!, $endDate: String! ) {
+    createExperience(company: $company, position: $position, startDate: $startDate, endDate: $endDate) {
       _id
-      experience {
         company
         position
         startDate
         endDate
-        description
-      }
     }
   }
 `;

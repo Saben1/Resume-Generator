@@ -3,10 +3,26 @@ const { Schema, model } = require('mongoose');
 
 const educationSchema = new Schema(
   {
-    institution: String,
-    degree: String,
-    startDate: String,
-    endDate: String,
+    institution:  {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    degree:  {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    startDate:  {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    endDate:  {
+      type: String,
+      required: true,
+      trim: true,
+    },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',

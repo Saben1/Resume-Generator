@@ -29,13 +29,13 @@ const resolvers = {
     resume: async (parent, { resumeId }) => {
       return Resume.findById(resumeId);
     },
-    educations: async () => {
+    education: async () => {
       return Education.find();
     },
     education: async (parent, { educationId }) => {
       return Education.findById(educationId);
     },
-    experiences: async () => {
+    experience: async () => {
       return Experience.find();
     },
     experience: async (parent, { experienceId }) => {
@@ -43,6 +43,9 @@ const resolvers = {
     },
     skills: async () => {
       return Skills.find();
+    },
+    skills: async (parent, { skillsId }) => {
+      return Skills.findById(skillsId);
     },
     information: async () => {
       return Information.findOne(); // Corrected model name
@@ -84,24 +87,13 @@ const resolvers = {
       }
     },
     createInformation: async (parent, {firstName, lastName, email, phone, address }, context) => {
-      // try {
-        console.log(context.body.variables.firstName);
-
-        // if (context.user) {
-          // console.log(informationInput);
-          // console.log("this is it");
-          // console.log(firstName.firstName);
+        // console.log(context.body.variables.firstName);
           const information = await Information.create({
             firstName: context.body.variables.firstName, lastName: context.body.variables.lastName, email: context.body.variables.email, phone: context.body.variables.phone, address: context.body.variables.address,
             user: context.user._id,
           });
           console.log("information");
           return information;
-        // }
-        // throw new AuthenticationError('You need to be logged in!');
-      // } catch (error) {
-      //   throw new UserInputError('Failed to create information', { errors: error.errors });
-      // }
     },
     createResume: async (parent, { resumeInput }, context) => {
       try {
@@ -118,50 +110,29 @@ const resolvers = {
         throw new UserInputError('Failed to create resume', { errors: error.errors });
       }
     },
-    createEducation: async (parent, { educationInput }, context) => {
-      try {
-        if (context.user) {
-          const education = await Education.create({
-            ...educationInput,
-            user: context.user._id,
-          });
-
-          return education;
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      } catch (error) {
-        throw new UserInputError('Failed to create education', { errors: error.errors });
-      }
+    createEducation: async (parent, {institution, degree, startDate, endDate }, context) => {
+      const education = await Education.create({
+          institution: context.body.variables.institution, degree: context.body.variables.degree, startDate: context.body.variables.startDate, endDate: context.body.variables.endDate,
+          user: context.user._id,
+        });
+        console.log("education");
+        return education;
+  },
+    createExperience: async (parent, {company, position, startDate, endDate }, context) => {
+      const experience = await Experience.create({
+        company: context.body.variables.company, position: context.body.variables.position, startDate: context.body.variables.startDate, endDate: context.body.variables.endDate,
+          user: context.user._id,
+      });
+      console.log("experience");
+      return experience;
     },
-    createExperience: async (parent, { experienceInput }, context) => {
-      try {
-        if (context.user) {
-          const experience = await Experience.create({
-            ...experienceInput,
-            user: context.user._id,
-          });
-
-          return experience;
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      } catch (error) {
-        throw new UserInputError('Failed to create experience', { errors: error.errors });
-      }
-    },
-    createSkills: async (parent, { skillsInput }, context) => {
-      try {
-        if (context.user) {
-          const skills = await Skills.create({
-            ...skillsInput,
-            user: context.user._id,
-          });
-
-          return skills;
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      } catch (error) {
-        throw new UserInputError('Failed to create skills', { errors: error.errors });
-      }
+    createSkills: async (parent, {skill}, context) => {
+      const skills = await Skills.create({
+        skill: context.body.variables.skill, 
+          user: context.user._id,
+      });
+      console.log("skills");
+      return skills;
     },
     updateInformation: async (parent, { informationInput }, context) => {
       try {
@@ -179,7 +150,6 @@ const resolvers = {
         throw new UserInputError('Failed to update personal info', { errors: error.errors });
       }
     },
-    // ... (Your other mutation resolvers here)
   },
 };
 

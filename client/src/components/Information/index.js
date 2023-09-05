@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client'; // Import useMutation
 import { Link, useNavigate } from 'react-router-dom';
 import { CREATE_INFORMATION } from '../../utils/mutations'; // Import your GraphQL mutation query
+import './Information.css'
 
 const Information = () => {
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ const Information = () => {
 
   const handleNextClick = async (event) => {
     event.preventDefault();
-    console.log(information.firstName);
     const { data } = await createInformation(
       {
         variables: { ...information}

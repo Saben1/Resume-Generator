@@ -12,31 +12,31 @@ const typeDefs = gql`
   type Resume {
     _id: ID!
     information: Information!
-    education: [Education]
+    education: Education!
     experience: [Experience]
     skills: [Skills]
     user: User!
   }
 
   type Education {
-    _id: ID!
-    institution: String!
-    degree: String!
-    startDate: String!
+    _id: ID
+    institution: String
+    degree: String
+    startDate: String
     endDate: String
   }
 
   type Experience {
-    _id: ID!
-    company: String!
-    position: String!
-    startDate: String!
+    _id: ID
+    company: String
+    position: String
+    startDate: String
     endDate: String
   }
 
   type Skills {
-    _id: ID!
-    name: String!
+    _id: ID
+    skill: String
   }
 
   type Auth {
@@ -55,7 +55,7 @@ const typeDefs = gql`
 
   input ResumeInput {
     information: InformationInput!
-    education: [EducationInput]
+    education: EducationInput
     experience: [ExperienceInput]
     skills: [SkillsInput]
   }
@@ -83,7 +83,7 @@ const typeDefs = gql`
   }
 
   input SkillsInput {
-    name: String!
+    skill: String
   }
 
   type Query {
@@ -92,11 +92,9 @@ const typeDefs = gql`
     me: User
     resumes: [Resume]
     resume(resumeId: ID!): Resume
-    educations: [Education]
-    education(educationId: ID!): Education
-    experiences: [Experience]
-    experience(experienceId: ID!): Experience
-    skills: [Skills]
+    education: Education
+    experience: Experience
+    skills: Skills
     information: Information
   }
 
@@ -104,9 +102,9 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     createResume(resumeInput: ResumeInput!): Resume
-    createEducation(educationInput: EducationInput!): Education
-    createExperience(experienceInput: ExperienceInput!): Experience
-    createSkills(skillsInput: SkillsInput!): Skills
+    createEducation(institution: String!, degree: String!, startDate: String!, endDate: String! ): Education
+    createExperience(company: String!, position: String!, startDate: String!, endDate: String!): Experience
+    createSkills(skill: String!): Skills
     updateInformation(informationInput: InformationInput!): Information
     createInformation(firstname: String!, lastName: String!, email: String!, phone: String!, address: String! ): Information
   }
