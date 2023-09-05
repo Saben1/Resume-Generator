@@ -33,6 +33,48 @@ export const GET_USER_BY_USERNAME = gql`
   }
 `;
 
+export const GET_INFORMATION = gql`
+query Information {
+  information {
+    address
+    email
+    firstName
+    lastName
+    phone
+  }
+}
+`;
+
+export const GET_EDUCATION = gql`
+query Education {
+  education {
+    institution
+    degree
+    startDate
+    endDate
+  }
+}
+`;
+
+export const GET_EXPERIENCE = gql`
+query Experience {
+  experience {
+    company
+    position
+    startDate
+    endDate
+  }
+}
+`;
+
+export const GET_SKILLS = gql`
+query Skills {
+  skills {
+    skill
+  }
+}
+`;
+
 // Query to fetch all resumes
 export const GET_RESUMES = gql`
   query resumes {

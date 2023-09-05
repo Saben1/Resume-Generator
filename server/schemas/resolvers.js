@@ -30,23 +30,23 @@ const resolvers = {
       return Resume.findById(resumeId);
     },
     education: async () => {
-      return Education.find();
+      return Education.findOne();
     },
-    education: async (parent, { educationId }) => {
-      return Education.findById(educationId);
-    },
+    // education: async (parent, { educationId }) => {
+    //   return Education.findById(educationId);
+    // },
     experience: async () => {
-      return Experience.find();
+      return Experience.findOne();
     },
-    experience: async (parent, { experienceId }) => {
-      return Experience.findById(experienceId);
-    },
+  //  experience: async (parent, { experienceId }) => {
+  //     return Experience.findById(experienceId);
+  //   }, 
     skills: async () => {
-      return Skills.find();
+      return Skills.findOne();
     },
-    skills: async (parent, { skillsId }) => {
-      return Skills.findById(skillsId);
-    },
+    // skills: async (parent, { skillsId }) => {
+    //   return Skills.findById(skillsId);
+    // },
     information: async () => {
       return Information.findOne(); // Corrected model name
     },
