@@ -3,10 +3,10 @@ import { useMutation } from '@apollo/client'; // Import useMutation
 import { Link, useNavigate } from 'react-router-dom';
 import { CREATE_PERSONALINFO } from '../../utils/mutations'; // Import your GraphQL mutation query
 
-const PersonalInformation = () => {
+const Information = () => {
   const navigate = useNavigate();
 
-  const [personalInfo, setPersonalInfo] = useState({
+  const [information, setInformation] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -16,10 +16,10 @@ const PersonalInformation = () => {
 
   const [createResume] = useMutation(CREATE_PERSONALINFO); // Initialize the mutation
 
-  const handlePersonalInfoChange = (e) => {
+  const handleInformationChange = (e) => {
     const { name, value } = e.target;
-    setPersonalInfo({
-      ...personalInfo,
+    setInformation({
+      ...information,
       [name]: value,
     });
   };
@@ -27,16 +27,16 @@ const PersonalInformation = () => {
   const handleNextClick = async () => {
     navigate('/education');
     // if (
-    //   personalInfo.firstName &&
-    //   personalInfo.lastName &&
-    //   personalInfo.email &&
-    //   personalInfo.phone &&
-    //   personalInfo.address
+    //   information.firstName &&
+    //   information.lastName &&
+    //   information.email &&
+    //   information.phone &&
+    //   information.address
     // ) {
     //   try {
     //     // Call the mutation to save the user's personal information
     //     const { data } = await createResume({
-    //       variables: { input: personalInfo },
+    //       variables: { input: information },
     //     });
 
     //     // Check the response from the mutation for success
@@ -64,8 +64,8 @@ const PersonalInformation = () => {
           type="text"
           className="form-control"
           name="firstName"
-          value={personalInfo.firstName}
-          onChange={handlePersonalInfoChange}
+          value={Information.firstName}
+          onChange={handleInformationChange}
           required
         />
       </div>
@@ -75,8 +75,8 @@ const PersonalInformation = () => {
           type="text"
           className="form-control"
           name="lastName"
-          value={personalInfo.lastName}
-          onChange={handlePersonalInfoChange}
+          value={information.lastName}
+          onChange={handleInformationChange}
           required
         />
       </div>
@@ -86,8 +86,8 @@ const PersonalInformation = () => {
           type="email"
           className="form-control"
           name="email"
-          value={personalInfo.email}
-          onChange={handlePersonalInfoChange}
+          value={information.email}
+          onChange={handleInformationChange}
           required
         />
       </div>
@@ -97,8 +97,8 @@ const PersonalInformation = () => {
           type="tel"
           className="form-control"
           name="phone"
-          value={personalInfo.phone}
-          onChange={handlePersonalInfoChange}
+          value={information.phone}
+          onChange={handleInformationChange}
           required
         />
       </div>
@@ -108,8 +108,8 @@ const PersonalInformation = () => {
           type="text"
           className="form-control"
           name="address"
-          value={personalInfo.address}
-          onChange={handlePersonalInfoChange}
+          value={information.address}
+          onChange={handleInformationChange}
         />
       </div>
       <button
@@ -122,4 +122,4 @@ const PersonalInformation = () => {
   );
 };
 
-export default PersonalInformation;
+export default Information;

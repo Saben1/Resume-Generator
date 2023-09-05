@@ -1,0 +1,51 @@
+/* ResumePreview.css */
+
+/* Style the entire page background */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; /* Set your desired background color */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Center the main content */
+  .resume-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Style the resume preview container */
+  .centered-preview {
+    background-color: #fff; /* Background color for the preview container */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a card-like effect */
+    max-width: 600px; /* Limit the width of the content */
+    border-color: black;
+  
+}
+  
+  /* Style the heading */
+  .centered-heading {
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  /* Style section headings */
+  h1 {
+    text-align: centre;
+    padding-left: 30%;
+  }
+  
+  /* Style paragraph text */
+  .centered-preview p {
+    font-size: 16px;
+    margin: 5px 0;
+  }

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import PersonalInformation from '../components/PersonalInformation'; // Updated component name
+import Information from '../components/Information'; // Updated component name
 import Signup from './Signup'; // Import the Signup component
 import Auth from '../utils/auth'; // Import the Auth utility
 
 const Home = () => {
   const [startClicked, setStartClicked] = useState(false);
-  const [showPersonalInformation, setShowPersonalInformation] = useState(false); // Updated state variable name
+  const [showInformation, setShowInformation] = useState(false); // Updated state variable name
 
   const handleStartClick = () => {
     setStartClicked(true);
-    setShowPersonalInformation(true); // Show the Personal Information form when "Start" is clicked
+    setShowInformation(true); // Show the Personal Information form when "Start" is clicked
   };
 
   return (
@@ -25,10 +25,10 @@ const Home = () => {
             Start
           </button>
         </div>
-      ) : showPersonalInformation ? (
-        <PersonalInformation />
+      ) : showInformation ? (
+        <Information />
       ) :  (
-        <PersonalInformation />
+        <Information />
       )}
     </div>
   );

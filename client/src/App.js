@@ -15,11 +15,11 @@ import Profile from './pages/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Skills from './components/Skills'; // Import the Skills component
-import PersonalInformation from './components/PersonalInformation';
+import Information from './components/Information';
 import Education from './components/Education'; // Import the Education component
 import Experience from './components/Experience'; // Import the Experience component
 
-import Display from './components/Display';
+import Preview from './components/Preview';
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -75,7 +75,7 @@ function App() {
               {/* Add a route for the PersonalInformation component */}
               <Route 
                 path="/personal-information"
-                element={<PersonalInformation />}
+                element={<Information />}
               />
               {/* Add routes for the Education, Experience, and Skills components */}
               <Route 
@@ -92,7 +92,7 @@ function App() {
               />
                 <Route 
                 path="/preview"
-                element={<Display />}
+                element={<Preview />}
               />
             </Routes>
           </div>
